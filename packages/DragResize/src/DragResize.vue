@@ -28,28 +28,6 @@
 <script src="./DragResize.js"></script>
 
 <style lang="scss" scoped>
-.vdr {
-  box-sizing: border-box;
-  display: flex;
-  align-content: center;
-  align-items: center;
-  border: 1px solid #d6d6d6;
-}
-
-.vdr.active{
-  border: 1px dashed #d6d6d6;
-}
-
-.vdr-stick {
-  box-sizing:border-box;
-  position: absolute;
-  margin: 4px;
-  font-size: 1px;
-  background: #ffffff;
-  border: 1px solid #6c6c6c;
-  box-shadow: 0 0 2px #bbb;
-}
-
 .vdr-stick-tl, .vdr-stick-br {
     cursor: nwse-resize;
 }
