@@ -4,15 +4,15 @@
     <WorkArea :width="700" :height="700" id="chome">
       <template v-for="(item,index) in nodes">
         <VueDragResize :key="index" :parentW="700" :parentH="700" :parentLimitation="true"
-          :name="item.name" :w="200" :h="200" :inlinking="LinkEnable"
+          :name="item.name" :w="200" :h="100" :inlinking="LinkEnable"
           :x="item.positionX" :y="item.positionY" 
-          @resizing="resize" @dragging="resize"
-          @v-on:dragstop="updateCompleted" @linkmove="linkmove"
+          @resizing="$refs.curve.vReloadall()" @dragging="$refs.curve.vReloadall()"
+          @dragstop="$refs.curve.vReloadall()" @linkmove="linkmove"
           @linkend="linkend" @linkNodeAreaIn="Destnodein" @linkNodeAreaOut="Destnodeout"
+          @delete="removeNode(index)"
           >
           <div style="width:100%">
             <h3>Hello World!</h3>
-            <p> item:{{index}} </p>
             <p> {{item.name}} </p>
           </div>
         </VueDragResize>
@@ -27,7 +27,6 @@
 import CurvePath from "../components/xPath/CurvePath.vue";
 import WorkArea from '@/components/xCanvas/WorkArea.vue'
 import VueDragResize from '@/components/DragResize/DragResize.vue'
-import { constants } from 'crypto';
 
 export default {
   name: 'home',
@@ -44,12 +43,22 @@ export default {
           nodes: [{
             name: 'node1',
             positionX: 300,
-            positionY: 0,
+            positionY: 60,
           },
           {
             name: 'node2',
+            positionX: 100,
+            positionY: 200,
+          },
+          {
+            name: 'node3',
+            positionX: 400,
+            positionY: 200,
+          },
+          {
+            name: 'node4',
             positionX: 300,
-            positionY: 300,
+            positionY: 400,
           }],
           paths:[],
           vpath:undefined
@@ -57,12 +66,13 @@ export default {
   },
 
   methods: {
-      resize(val) {
-        console.log(val.rect)
-        this.$refs.curve.vReloadall()
-      },
-      updateCompleted(){
-        this.$refs.curve.vReloadall()
+      removeNode(index){
+        let rnode=this.nodes.splice(index,1)[0];
+        for (let index = this.paths.length-1; index > -1; index--) {
+          if(this.paths[index].startNode==rnode.name || this.paths[index].endNode==rnode.name){
+            this.paths.splice(index,1);
+          }          
+        }
       },
       linkmove(val){
         this.LinkNode1Found=true;

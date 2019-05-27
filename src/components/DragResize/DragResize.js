@@ -46,18 +46,18 @@ export default {
             type: Boolean, default: false
         },
         snapToGrid: {
-            type: Boolean, default: false
+            type: Boolean, default: true
         },
         gridX: {
             type: Number,
-            default: 50,
+            default: 10,
             validator: function (val) {
                 return val > 0
             }
         },
         gridY: {
             type: Number,
-            default: 50,
+            default: 10,
             validator: function (val) {
                 return val > 0
             }
@@ -199,6 +199,7 @@ export default {
         this.rawRight = this.parentWidth - this.rawWidth - this.rawLeft;
         this.rawBottom = this.parentHeight - this.rawHeight - this.rawTop;
 
+        document.documentElement.addEventListener('keyup',this.keyup);
         document.documentElement.addEventListener('mousemove', this.move);
         document.documentElement.addEventListener('mouseup', this.up);
         document.documentElement.addEventListener('mouseleave', this.up);
@@ -225,6 +226,7 @@ export default {
     },
 
     beforeDestroy: function () {
+        document.documentElement.removeEventListener('keyup',this.keyup);
         document.documentElement.removeEventListener('mousemove', this.move);
         document.documentElement.removeEventListener('mouseup', this.up);
         document.documentElement.removeEventListener('mouseleave', this.up);
@@ -237,6 +239,12 @@ export default {
     },
 
     methods: {
+        keyup(ev){
+            if(this.active && ev.keyCode=="46"){
+                this.$emit('delete');
+            }
+        },
+
         deselect() {
             if (this.preventActiveBehavior) {
                 return
@@ -692,14 +700,14 @@ export default {
         },
 
         width() {
-            if(this.parentWidth && this.left && this.right){
+            if(this.parentWidth-this.left-this.right>0){
                 return this.parentWidth - this.left - this.right;
             }
             return this.rawWidth;
         },
 
         height() {
-            if(this.parentHeight && this.top && this.bottom){
+            if(this.parentHeight-this.top-this.bottom>0){
                 return this.parentHeight - this.top - this.bottom;
             }
             return this.rawHeight;

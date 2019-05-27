@@ -15,7 +15,7 @@ import TLine from './tline.vue'
 
 export default {
   components: {TLine},
-  name: 'CurvePath',
+  name: 'xcurve-path',
   props: {
     paths: {
       type: Array

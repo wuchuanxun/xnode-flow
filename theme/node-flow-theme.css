@@ -1,0 +1,18 @@
+.task-tline {
+  cursor: default; }
+  .task-tline-con {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0);
+    stroke-width: 15px; }
+  .task-tline-con-wrap {
+    fill: none;
+    stroke: gray;
+    stroke-width: 1px; }
+  .task-tline-dotted {
+    stroke: rgba(57, 202, 116, 0.8);
+    stroke-width: 2px;
+    stroke-dasharray: 5;
+    -webkit-animation: ant-line 30s infinite linear;
+    animation: ant-line 30s infinite linear; }
+
+/*# sourceMappingURL=node-flow-theme.css.map */

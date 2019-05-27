@@ -12,7 +12,7 @@
 const prefixCls = 'task-work-area'
 
 export default {
-  name: 'WorkArea',
+  name: 'xwork-area',
   props: {
     width: {
       type: [String, Number],
