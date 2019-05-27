@@ -1,6 +1,6 @@
 {
   "name": "xnode-flow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -22,5 +22,6 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
-  }
+  },
+  "style": "theme/node-flow-theme.css"
 }

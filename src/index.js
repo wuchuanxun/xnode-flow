@@ -2,7 +2,7 @@ import CurvePath from "./components/xPath/CurvePath.vue";
 import WorkArea from './components/xCanvas/WorkArea.vue'
 import VueDragResize from './components/DragResize/DragResize.vue'
 
-const version = '2.2.13';
+const version = '0.1.1';
 const install = function(Vue, config = {}) {
   if (install.installed) return;
 

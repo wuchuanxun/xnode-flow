@@ -1,29 +1,12 @@
 # xnode-flow
 
+本项目根据以下项目改造
+> https://github.com/Liwengbin/vue-task-node
+
 ## Project setup
 ```
-npm install
-```
+npm i -S github:wuchuanxun/xnode-flow
 
-### Compiles and hot-reloads for development
+import xnode-flow from "xnode-flow"
+Vue.use(xnode-flow);
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
