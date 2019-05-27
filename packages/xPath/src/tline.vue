@@ -7,7 +7,7 @@
   </g>
 </template>
 <script>
-import Line from '@/utils/line.js'
+import Line from './utils/line.js'
 const prefixCls = 'task-tline'
 
 export default {

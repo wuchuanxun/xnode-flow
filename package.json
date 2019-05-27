@@ -1,11 +1,16 @@
 {
   "name": "xnode-flow",
-  "version": "0.1.1",
+  "version": "1.0.0",
+  "description":"用于构建Flow Chart",
+  "main":"lib/XNodeFlow.umd.min.js",
   "private": true,
+  "keyword":"flow chart vue",
+  "author":"Chuanxun Wu",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib":"vue-cli-service build --target lib --name XNodeFlow --dest lib packages/index.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -22,6 +27,5 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
-  },
-  "style": "theme/node-flow-theme.css"
+  }
 }
