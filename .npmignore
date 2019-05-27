@@ -1,7 +1,3 @@
-# local env files
-.env.local
-.env.*.local
-
 # 忽略目录
 examples/
 public/
@@ -12,5 +8,4 @@ dist/
 # 忽略指定文件
 vue.config.js
 babel.config.js
-README.md
 postcss.config.js
