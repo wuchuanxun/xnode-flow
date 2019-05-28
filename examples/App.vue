@@ -2,7 +2,7 @@
   <div id="app">
     <button @click="LinkEnable=true;">link</button>
     <button @click="activeall">ac</button>
-    <xwork-area :width="700" :height="700" id="chome">
+    <xwork-area :width="700" :height="700" id="chome" cursor="copy">
       <template v-for="(item,index) in nodes">
         <xdrag-resize :key="index" :parentW="700" :parentH="700" :parentLimitation="true"
           :name="item.name" :w="200" :h="100" :inlinking="LinkEnable"

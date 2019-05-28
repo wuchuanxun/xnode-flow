@@ -22,6 +22,10 @@ export default {
       type: [String, Number],
       default: "100vh"
     },
+    cursor:{
+      type:String,
+      default:'default'
+    },
     id: {
       type: [String, Number]
     }
@@ -34,8 +38,9 @@ export default {
     },
     areaStyles () {
       let style = {}
-      style.minWidth = `${this.width}px`
-      style.minHeight = `${this.height}px`
+      style.minWidth = `${this.width}px`;
+      style.minHeight = `${this.height}px`;
+      style.cursor=this.cursor;
       return style
     }
   },
