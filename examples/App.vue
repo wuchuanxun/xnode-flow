@@ -9,7 +9,7 @@
           :x="item.positionX" :y="item.positionY" :isActive="item.IsSelected"
           @activated="item.IsSelected=true" @deactivated="item.IsSelected=false"
           @resizing="$refs.curve.vReloadall()" @dragging="$refs.curve.vReloadall()"
-          @dragstop="$refs.curve.vReloadall()" @linkmove="linkmove"
+          @dragstop="$refs.curve.vReloadall()" @linkmove="linkmove" @dblclick="dbclickHandler(item.name)"
           @linkend="linkend" @linkNodeAreaIn="Destnodein" @linkNodeAreaOut="Destnodeout"
           @delete="removeNode(index)"
           >
@@ -66,6 +66,9 @@ export default {
             this.paths.splice(index,1);
           }          
         }
+      },
+      dbclickHandler(val){
+        alert(val);
       },
       activeall(){
         this.nodes.forEach(ele=>{

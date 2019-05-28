@@ -5,6 +5,7 @@
         :id="'xnode-'+name"
         :class="active&&(!inlinking)? 'active' : 'inactive'"
         @mousedown="bodyDown($event)"
+        @dblclick="$emit('dblclick')"
         @touchstart="bodyDown($event)"
         @touchend="up($event)"
         @mouseenter="bodyEnter()"
