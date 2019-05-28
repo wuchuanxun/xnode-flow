@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" :style="areaStyles" @contextmenu="mouseMenu">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="width" :height="height" :id="id">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" :width="width" :height="height" :id="id" class="dropzone">
       <g transform="translate(0,0) scale(1,1)">
         <slot></slot>
       </g>
@@ -16,11 +16,11 @@ export default {
   props: {
     width: {
       type: [String, Number],
-      default: 0
+      default: '100%'
     },
     height: {
       type: [String, Number],
-      default: 0
+      default: "100vh"
     },
     id: {
       type: [String, Number]

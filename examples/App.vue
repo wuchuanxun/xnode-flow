@@ -6,6 +6,7 @@
         <xdrag-resize :key="index" :parentW="700" :parentH="700" :parentLimitation="true"
           :name="item.name" :w="200" :h="100" :inlinking="LinkEnable"
           :x="item.positionX" :y="item.positionY" 
+          @activated="item.IsSelected=true" @deactivated="item.IsSelected=false"
           @resizing="$refs.curve.vReloadall()" @dragging="$refs.curve.vReloadall()"
           @dragstop="$refs.curve.vReloadall()" @linkmove="linkmove"
           @linkend="linkend" @linkNodeAreaIn="Destnodein" @linkNodeAreaOut="Destnodeout"
@@ -17,7 +18,8 @@
           </div>
         </xdrag-resize>
       </template>
-      <xcurve-path areaid="chome" :paths="paths" ref="curve"></xcurve-path>
+      <xcurve-path areaid="chome" :paths="paths" ref="curve"
+        @delete="removeLink"></xcurve-path>
     </xwork-area>
   </div>
 </template>
@@ -63,6 +65,9 @@ export default {
           }          
         }
       },
+      removeLink(index){
+        this.paths.splice(index,1);
+      },
       linkmove(val){
         this.LinkNode1Found=true;
         if(this.LinkNode2Found){
@@ -79,6 +84,7 @@ export default {
       linkend(val){
         this.$refs.curve.virtualLoad(undefined);
         if(this.LinkNode2Found){
+          this.vpath.IsSelected=false;
           this.paths.push(this.vpath);
           //this.$refs.curve.vReloadall()
           this.vpath={};

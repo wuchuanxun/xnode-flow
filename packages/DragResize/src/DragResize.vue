@@ -26,27 +26,3 @@
 </template>
 
 <script src="./DragResize.js"></script>
-
-<style lang="scss" scoped>
-.vdr-stick-tl, .vdr-stick-br {
-    cursor: nwse-resize;
-}
-
-.vdr-stick-tm, .vdr-stick-bm {
-    left: 50%;
-    cursor: ns-resize;
-}
-
-.vdr-stick-tr, .vdr-stick-bl {
-    cursor: nesw-resize;
-}
-
-.vdr-stick-ml, .vdr-stick-mr {
-    top: 50%;
-    cursor: ew-resize;
-}
-
-.vdr-stick.not-resizable{
-    display: none;
-}
-</style>

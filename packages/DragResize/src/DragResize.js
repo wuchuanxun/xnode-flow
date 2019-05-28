@@ -249,7 +249,7 @@ export default {
             if (this.preventActiveBehavior) {
                 return
             }
-            this.active = false
+            this.active = false;
         },
 
         move(ev) { 

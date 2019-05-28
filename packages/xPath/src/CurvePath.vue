@@ -2,7 +2,10 @@
   <g ref="gss">
     <template v-if="clinks.length > 0">
       <template v-for="(item,index) in clinks">
-        <t-line :key="index" :portData="item" >
+        <t-line :key="index" :portData="item" 
+          @selected="SetSelectState(index,true)"
+          @unselected="SetSelectState(index,false)"
+          @delete="$emit('delete',index)">
         </t-line>
       </template>
     </template>
@@ -37,6 +40,9 @@ export default {
     this.vReloadall()
   },
   methods: {
+    SetSelectState(index,value){
+      this.paths[index].IsSelected=value;
+    },
     vReloadall () {
       let me = this
       this.clinks = []
@@ -44,10 +50,11 @@ export default {
         let vstart = document.getElementById('xnode-'+o.startNode)
         let vend = document.getElementById('xnode-'+o.endNode)
         if (vend && vstart) {
-          let obj = me.computeXY(vstart, vend)
-          obj.dotted = o.dotted
-          obj.ptype = o.ptype
-          me.clinks.push(obj)
+          let obj = me.computeXY(vstart, vend);
+          obj.dotted = o.dotted;
+          obj.ptype = o.ptype;
+          obj.IsSelected=o.IsSelected;
+          me.clinks.push(obj);
         }
       })
     },

@@ -1,24 +1,31 @@
 <template>
-  <g :class="classes">
+  <g :class="{'task-tline':true,active:selected}">
     <path :class="conWrapCls" :d="drawCurvePath(portData.Mxy, portData.Txy)">
     </path>
-    <path :class="conCls" :d="lpath">
+    <path :class="conCls" :d="lpath" @mousedown="bodyClick">
     </path>
   </g>
 </template>
 <script>
 import Line from './utils/line.js'
+import { constants } from 'crypto';
+import { truncate } from 'fs';
 const prefixCls = 'task-tline'
 
 export default {
   name: 'TLine',
   data () {
     return {
-      lpath: 'M0 0 Q 0 0, 0 0 T 0 0'
+      lpath: 'M0 0 Q 0 0, 0 0 T 0 0',
+      selected:false
     }
   },
   props: {
     portData: {
+      IsSelected:{
+        type:Boolean,
+        default:false
+      },
       ptype: {
         type: [String, Number],
         default: 'Q'
@@ -38,11 +45,6 @@ export default {
     }
   },
   computed: {
-    classes () {
-      return [
-        `${prefixCls}`
-      ]
-    },
     conCls () {
       return [
         `${prefixCls}-con`
@@ -54,7 +56,7 @@ export default {
         `${prefixCls}-con-wrap`,
         me.portData.dotted ? `${prefixCls}-dotted` : ``
       ]
-    }
+    },
   },
   methods: {
     drawCurvePath (Mxy, Txy) {
@@ -62,7 +64,37 @@ export default {
         this.lpath = Line.drawCurvePath(Mxy, Txy, this.portData.ptype)
       }
       return this.lpath
+    },
+    bodyClick(ev){
+      this.selected=true;
+      this.$emit("selected")
+      ev.stopPropagation();
+      ev.preventDefault();
+    },
+    click(ev){
+      if(this.selected){
+        this.selected=false;
+        this.$emit("unselected")
+        ev.stopPropagation();
+        ev.preventDefault();
+      }
+    },
+    delete(ev){
+      if(this.selected && ev.keyCode=="46"){
+        this.$emit('delete');
+      }
     }
+  },
+  created(){
+    this.selected=this.portData.IsSelected;
+  },
+  mounted(){
+    document.documentElement.addEventListener('mousedown',this.click,false);
+    document.documentElement.addEventListener('keyup',this.delete,false);
+  },
+  beforeDestroy(){
+    document.documentElement.removeEventListener('mousedown',this.click);
+    document.documentElement.addEventListener('keyup',this.delete,false);
   }
 }
 </script>

@@ -20,6 +20,14 @@
     -webkit-animation: ant-line 30s infinite linear;
     animation: ant-line 30s infinite linear;
   }
+
+  &.active>&-con-wrap{
+    stroke: red;
+  }
+
+  &.active>&-dotted{
+    stroke: red;
+  }
 }
 
 .vdr {
@@ -42,4 +50,26 @@
   background: #ffffff;
   border: 1px solid #6c6c6c;
   box-shadow: 0 0 2px #bbb;
+}
+
+.vdr-stick-tl, .vdr-stick-br {
+  cursor: nwse-resize;
+}
+
+.vdr-stick-tm, .vdr-stick-bm {
+  left: 50%;
+  cursor: ns-resize;
+}
+
+.vdr-stick-tr, .vdr-stick-bl {
+  cursor: nesw-resize;
+}
+
+.vdr-stick-ml, .vdr-stick-mr {
+  top: 50%;
+  cursor: ew-resize;
+}
+
+.vdr-stick.not-resizable{
+  display: none;
 }
