@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <button @click="LinkEnable=true;">link</button>
+    <button @click="activeall">ac</button>
     <xwork-area :width="700" :height="700" id="chome">
       <template v-for="(item,index) in nodes">
         <xdrag-resize :key="index" :parentW="700" :parentH="700" :parentLimitation="true"
           :name="item.name" :w="200" :h="100" :inlinking="LinkEnable"
-          :x="item.positionX" :y="item.positionY" 
+          :x="item.positionX" :y="item.positionY" :isActive="item.IsSelected"
           @activated="item.IsSelected=true" @deactivated="item.IsSelected=false"
           @resizing="$refs.curve.vReloadall()" @dragging="$refs.curve.vReloadall()"
           @dragstop="$refs.curve.vReloadall()" @linkmove="linkmove"
@@ -59,11 +60,17 @@ export default {
   methods: {
       removeNode(index){
         let rnode=this.nodes.splice(index,1)[0];
+        console.log(rnode.IsSelected);
         for (let index = this.paths.length-1; index > -1; index--) {
           if(this.paths[index].startNode==rnode.name || this.paths[index].endNode==rnode.name){
             this.paths.splice(index,1);
           }          
         }
+      },
+      activeall(){
+        this.nodes.forEach(ele=>{
+          this.$set(ele,'IsSelected',true);
+        })
       },
       removeLink(index){
         this.paths.splice(index,1);

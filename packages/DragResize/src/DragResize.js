@@ -15,6 +15,9 @@ const styleMapping = {
 export default {
     name: 'xdrag-resize',
     props: {
+        IsSelected:{
+            type:Boolean,default:false
+        },
         inlinking:{
             type:Boolean,default:false,
         },
