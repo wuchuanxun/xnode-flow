@@ -14,11 +14,12 @@ export default {
     let mtx = Math.floor((Txy.x - Mxy.x) / 4)
     let mty = Math.floor((Txy.y - Mxy.y) / 4)
 
-    if (mty < 0 && mtx > 10) {
+    if (mty < 0 && Math.abs(mtx)>10) {
+      let deltax = (mtx>0)? 10:-10;
       if (mty > -10) {
-        this.Q1xy = new XYObject(Mxy.x + 10, Mxy.y + 10)
+        this.Q1xy = new XYObject(Mxy.x + deltax, Mxy.y + 10)
       } else {
-        this.Q1xy = new XYObject(Mxy.x + 10, Mxy.y + 4 * Math.abs(mty))
+        this.Q1xy = new XYObject(Mxy.x + deltax, Mxy.y + 4 * Math.abs(mty))
       }
       this.Q2xy = new XYObject(Mxy.x + 2 * mtx, Mxy.y + 2 * mty)
     } else {
