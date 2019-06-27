@@ -42,7 +42,7 @@ export default {
   methods: {
     SetSelectState(index,value){
       this.paths[index].IsSelected=value;
-      this.$emit(value? 'activated':'deactivated');
+      this.$emit(value? 'activated':'deactivated',index);
     },
     vReloadall () {
       let me = this
