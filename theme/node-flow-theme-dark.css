@@ -3,13 +3,13 @@
   .task-tline-con {
     fill: none;
     stroke: rgba(255, 255, 255, 0);
-    stroke-width: 15px; }
+    stroke-width: 1px; }
   .task-tline-con-wrap {
     fill: none;
-    stroke: gray;
+    stroke: rgba(57, 202, 116, 0.8);
     stroke-width: 1px; }
   .task-tline-dotted {
-    stroke: rgba(57, 202, 116, 0.8);
+    stroke: rgba(90, 139, 218, 0.8);
     stroke-width: 2px;
     stroke-dasharray: 5;
     -webkit-animation: ant-line 30s infinite linear;
@@ -24,10 +24,48 @@
   display: flex;
   align-content: center;
   align-items: center;
-  border: 1px solid #d6d6d6; }
+  border: none; }
+  .vdr .vdr-content-wrap {
+    position: absolute;
+    background-color: whitesmoke;
+    left: 3px;
+    right: 4px;
+    top: 3px;
+    bottom: 3px;
+    z-index: -200; }
+  .vdr .shape-elipse {
+    border-radius: 30px; }
+    .vdr .shape-elipse:before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      top: 5px;
+      bottom: 5px;
+      background-color: #b8b9f8;
+      border-radius: 30px; }
+  .vdr .shape-rect:before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    background-color: #a4eccb; }
+  .vdr .shape-diamond {
+    clip-path: polygon(0% 50%, 15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%); }
+    .vdr .shape-diamond:before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      top: 5px;
+      bottom: 5px;
+      background-color: #c3f081;
+      clip-path: polygon(0% 50%, 15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%); }
 
 .vdr.active {
-  border: 1px solid #d6d6d6; }
+  border: 1px dashed #d6d6d6; }
 
 .vdr-stick {
   box-sizing: border-box;
@@ -37,6 +75,11 @@
   background: #ffffff;
   border: 1px solid #6c6c6c;
   box-shadow: 0 0 2px #bbb; }
+
+.linkdot {
+  width: 5px;
+  height: 5px;
+  background-color: gray; }
 
 .vdr-stick-tl, .vdr-stick-br {
   cursor: nwse-resize; }
