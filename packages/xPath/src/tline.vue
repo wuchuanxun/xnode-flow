@@ -70,7 +70,7 @@ export default {
       ev.preventDefault();
     },
     click(ev){
-      if(this.selected){
+      if(this.selected && ev.target.className.baseVal === "dropzone"){
         this.selected=false;
         this.$emit("unselected")
         ev.stopPropagation();

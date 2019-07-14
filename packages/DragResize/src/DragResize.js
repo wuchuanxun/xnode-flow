@@ -269,10 +269,8 @@ export default {
             if (this.preventActiveBehavior) {
                 return
             }
-            if(this.active){
-                if (event.target.className.baseVal === "dropzone"){
-                    this.active=false;
-                }
+            if(this.active && ev.target.className.baseVal === "dropzone"){
+                this.active=false;
             }
         },
 
