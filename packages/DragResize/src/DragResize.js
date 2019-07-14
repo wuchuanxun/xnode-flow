@@ -24,6 +24,19 @@ export default {
         name:{
             type:String,default:"",
         },
+        shape:{
+            type:String,default:"",
+        },
+        inMode:{
+            type:Array,default:()=>{
+                return ['50%'];
+            }
+        },
+        outMode:{
+            type:Array,default:()=>{
+                return ['50%'];
+            }
+        },
         parentScaleX: {
             type: Number, default: 1,
         },
@@ -170,6 +183,7 @@ export default {
             top: this.y,
             right: null,
             bottom: null,
+            hovered:false,
             minWidth: this.minw,
             minHeight: this.minh
         }
@@ -261,10 +275,18 @@ export default {
             }
             if(this.inlinking){
                 this.linking=true;
+                let pctg=0.5;
+                if(this.outMode.length>1){
+                    let rect=this.$refs.Area.getBoundingClientRect();
+                    pctg=(ev.clientX-rect.left)/rect.width;
+                    pctg = (pctg<0.5)? this.outMode[0]:this.outMode[1];
+                    pctg = parseFloat(pctg) / 100.0;
+                }
                 this.$emit('linkmove',{
                     x:ev.clientX,
                     y:ev.clientY,
-                    source:this.name
+                    source:this.name,
+                    pctg:pctg
                 });
                 return;
             }
@@ -296,13 +318,23 @@ export default {
             }
         },
 
-        bodyEnter(){
+        bodyEnter(ev){
+            this.hovered=true;
             if(this.inlinking){
-                this.$emit('linkNodeAreaIn',this.name);
+                if(this.inMode.length<=1){
+                    this.$emit('linkNodeAreaIn',this.name,0.5);
+                    return;
+                }
+                let rect=this.$refs.Area.getBoundingClientRect();
+                let pctg=(ev.clientX-rect.left)/rect.width;
+                pctg = (pctg<0.5)? this.inMode[0]:this.inMode[1];
+                pctg = parseFloat(pctg) / 100.0;
+                this.$emit('linkNodeAreaIn',this.name,pctg);
             }
         },
 
         bodyLeave(){
+            this.hovered=false;
             if(this.inlinking){
                 this.$emit('linkNodeAreaOut',this.name);
             }

@@ -2,14 +2,12 @@
   <g :class="{'task-tline':true,active:selected}">
     <path :class="conWrapCls" :d="drawCurvePath(portData.Mxy, portData.Txy)">
     </path>
-    <path :class="conCls" :d="lpath" @mousedown="bodyClick">
+    <path :class="conCls" :d="lpath" @mousedown="bodyClick" marker-end="url(#markerArrow)">
     </path>
   </g>
 </template>
 <script>
 import Line from './utils/line.js'
-import { constants } from 'crypto';
-import { truncate } from 'fs';
 const prefixCls = 'task-tline'
 
 export default {

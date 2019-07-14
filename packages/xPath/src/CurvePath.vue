@@ -15,6 +15,7 @@
 </template>
 <script>
 import TLine from './tline.vue'
+import { constants } from 'crypto';
 
 export default {
   components: {TLine},
@@ -51,7 +52,7 @@ export default {
         let vstart = document.getElementById('xnode-'+o.startNode)
         let vend = document.getElementById('xnode-'+o.endNode)
         if (vend && vstart) {
-          let obj = me.computeXY(vstart, vend);
+          let obj = me.computeXY(vstart,o.Pstart, vend,o.Pend);
           obj.dotted = o.dotted;
           obj.ptype = o.ptype;
           obj.IsSelected=o.IsSelected;
@@ -65,7 +66,7 @@ export default {
           let vstart = document.getElementById('xnode-'+vpath.startNode)
           let vend = document.getElementById('xnode-'+vpath.endNode)
           if (vend && vstart) {
-            let obj = this.computeXY(vstart, vend)
+            let obj = this.computeXY(vstart,vpath.Pstart, vend,vpath.Pend)
             obj.dotted = vpath.dotted
             obj.ptype = vpath.ptype
             this.vpath = obj;
@@ -75,7 +76,7 @@ export default {
           let area = document.getElementById(this.areaid)
           let sbox=vstart.getBoundingClientRect();
           vpath.Mxy= {
-            x: sbox.x+sbox.width/2 - area.getBoundingClientRect().left,
+            x: sbox.x+sbox.width*vpath.Pstart - area.getBoundingClientRect().left,
             y: sbox.y+sbox.height - area.getBoundingClientRect().top
           };
           vpath.Txy={
@@ -88,17 +89,17 @@ export default {
         this.vpath=undefined;
       }
     },
-    computeXY (vstart, vend) {
+    computeXY (vstart,pstart,vend,pend) {
       let area = document.getElementById(this.areaid)
       let sbox=vstart.getBoundingClientRect();
       let ebox=vend.getBoundingClientRect();
       let obj = {
         Mxy: {
-          x: sbox.x+sbox.width/2 - area.getBoundingClientRect().left,
+          x: sbox.x+sbox.width*pstart - area.getBoundingClientRect().left,
           y: sbox.y+sbox.height - area.getBoundingClientRect().top
         },
         Txy: {
-          x: ebox.x+ebox.width/2 - area.getBoundingClientRect().left,
+          x: ebox.x+ebox.width*pend - area.getBoundingClientRect().left,
           y: ebox.y - area.getBoundingClientRect().top
         }
       }

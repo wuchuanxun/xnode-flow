@@ -7,6 +7,7 @@
         <xdrag-resize :key="index" :parentW="700" :parentH="700" :parentLimitation="true"
           :name="item.name" :w="200" :h="100" :inlinking="LinkEnable"
           :x="item.positionX" :y="item.positionY" :isActive="item.IsSelected"
+          :shape="item.shape" :inMode="item.inMode"
           @activated="item.IsSelected=true" @deactivated="item.IsSelected=false"
           @resizing="$refs.curve.vReloadall()" @dragging="$refs.curve.vReloadall()"
           @dragstop="$refs.curve.vReloadall()" @linkmove="linkmove" @dblclick="dbclickHandler(item.name)"
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
       return {
@@ -36,21 +38,29 @@ export default {
             name: 'node1',
             positionX: 300,
             positionY: 60,
+            shape:'elipse',
+            inMode:['50%'],
           },
           {
             name: 'node2',
             positionX: 100,
             positionY: 200,
+            inMode:['50%'],
+            shape:'diamond'
           },
           {
             name: 'node3',
             positionX: 400,
             positionY: 200,
+            inMode:['30%','70%'],
+            shape:'rect'
           },
           {
             name: 'node4',
             positionX: 300,
             positionY: 400,
+            inMode:['50%'],
+            shape:'elipse'
           }],
           paths:[],
           vpath:undefined
@@ -79,19 +89,23 @@ export default {
         this.paths.splice(index,1);
       },
       linkmove(val){
-        this.LinkNode1Found=true;
         if(this.LinkNode2Found){
           return;
         }
+        if(this.LinkNode1Found){
+          val.pctg=this.vpath.Pstart;
+        }
         this.vpath={
-          dotted: true,
+          dotted: false,
           ptype: 'Q',
           startNode: val.source,
+          Pstart:val.pctg,
           Txy: val
-        }
+        };
+        this.LinkNode1Found=true;
         this.$refs.curve.virtualLoad(this.vpath);
       },
-      linkend(val){
+      linkend(){
         this.$refs.curve.virtualLoad(undefined);
         if(this.LinkNode2Found){
           this.vpath.IsSelected=false;
@@ -103,14 +117,18 @@ export default {
         this.LinkNode2Found=false;
         this.LinkEnable=false;
       },
-      Destnodein(val){
+      Destnodein(val,pctg){
+        if(this.vpath && this.vpath.startNode==val){
+          return;
+        }
         if(this.LinkNode1Found){
           this.LinkNode2Found=true;
           this.vpath.endNode=val;
+          this.vpath.Pend=pctg;
           this.$refs.curve.virtualLoad(this.vpath);
         }
       },
-      Destnodeout(val){
+      Destnodeout(){
         this.LinkNode2Found=false;
       }
   }
