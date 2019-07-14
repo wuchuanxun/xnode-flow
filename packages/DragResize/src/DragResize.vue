@@ -1,5 +1,5 @@
 <template>
-  <g :transform="'translate('+left+','+top+')'" style="margin:10px;">
+  <g :transform="`translate(${left},${top}) scale(${scale},${scale})`" style="margin:10px;">
     <foreignObject :height="height" :width="width">
       <div class="vdr" :style="style"
         :id="'xnode-'+name" ref="Area"

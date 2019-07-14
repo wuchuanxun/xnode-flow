@@ -7,7 +7,7 @@
         <xdrag-resize :key="index" :parentW="700" :parentH="700" :parentLimitation="true"
           :name="item.name" :w="200" :h="100" :inlinking="LinkEnable"
           :x="item.positionX" :y="item.positionY" :isActive="item.IsSelected"
-          :shape="item.shape" :inMode="item.inMode"
+          :shape="item.shape" :inMode="item.inMode" :scale="0.9"
           @activated="item.IsSelected=true" @deactivated="item.IsSelected=false"
           @resizing="$refs.curve.vReloadall()" @dragging="$refs.curve.vReloadall()"
           @dragstop="$refs.curve.vReloadall()" @linkmove="linkmove" @dblclick="dbclickHandler(item.name)"

@@ -37,6 +37,9 @@ export default {
                 return ['50%'];
             }
         },
+        scale:{
+            type:Number,default:1,
+        },
         parentScaleX: {
             type: Number, default: 1,
         },
@@ -262,11 +265,15 @@ export default {
             }
         },
 
-        deselect() {
+        deselect(ev) {
             if (this.preventActiveBehavior) {
                 return
             }
-            this.active = false;
+            if(this.active){
+                if (event.target.className.baseVal === "dropzone"){
+                    this.active=false;
+                }
+            }
         },
 
         move(ev) { 
