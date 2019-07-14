@@ -1,6 +1,6 @@
 {
   "name": "xnode-flow",
-  "version": "2.1.1",
+  "version": "2.1.6",
   "description":"用于构建Flow Chart",
   "main":"lib/XNodeFlow.umd.min.js",
   "private": true,

@@ -1,8 +1,8 @@
 <template>
   <g :class="{'task-tline':true,active:selected}">
-    <path :class="conWrapCls" :d="drawCurvePath(portData.Mxy, portData.Txy)">
+    <path :class="conWrapCls" :d="drawCurvePath(portData.Mxy, portData.Txy)" marker-end="url(#markerArrow)">
     </path>
-    <path :class="conCls" :d="lpath" @mousedown="bodyClick" marker-end="url(#markerArrow)">
+    <path :class="conCls" :d="lpath" @mousedown="bodyClick">
     </path>
   </g>
 </template>
