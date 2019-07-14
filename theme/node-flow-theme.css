@@ -2,8 +2,8 @@
   cursor: default; }
   .task-tline-con {
     fill: none;
-    stroke: rgba(255, 255, 255, 0);
-    stroke-width: 1px; }
+    stroke: #ffffff00;
+    stroke-width: 25px; }
   .task-tline-con-wrap {
     fill: none;
     stroke: rgba(57, 202, 116, 0.8);
