@@ -89,12 +89,11 @@ export default {
         this.paths.splice(index,1);
       },
       linkmove(val){
-        if(this.LinkNode2Found){
-          return;
-        }
         if(this.LinkNode1Found){
           val.pctg=this.vpath.Pstart;
         }
+        if(val.pctg<0 || this.LinkNode2Found) return;
+
         this.vpath={
           dotted: false,
           ptype: 'Q',

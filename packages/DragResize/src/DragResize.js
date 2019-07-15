@@ -280,7 +280,7 @@ export default {
             }
             if(this.inlinking){
                 this.linking=true;
-                let pctg=0.5;
+                let pctg=(this.outMode.length==0)? -1.0:0.5;
                 if(this.outMode.length>1){
                     let rect=this.$refs.Area.getBoundingClientRect();
                     pctg=(ev.clientX-rect.left)/rect.width;
@@ -326,8 +326,11 @@ export default {
         bodyEnter(ev){
             this.hovered=true;
             if(this.inlinking){
-                if(this.inMode.length<=1){
+                if(this.inMode.length==1){
                     this.$emit('linkNodeAreaIn',this.name,0.5);
+                    return;
+                }else if(this.inMode.length==0){
+                    this.$emit('linkNodeAreaIn',this.name,-1);
                     return;
                 }
                 let rect=this.$refs.Area.getBoundingClientRect();
